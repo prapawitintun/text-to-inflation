@@ -46,9 +46,31 @@ I also attended a Pneuhaus lecture at Harvard Graduate School of Design. Seeing 
 </figure>
 
 
-### Toward text-to-inflation
+### Neil Gershenfeld and collaborators: from language to fabrication
 
-Neil’s teaching encouraged me to ask how we might fabricate almost anything using air. I would like to investigate text-to-inflation as a direction for my final project: a workflow connecting a design intention, a pattern, a material assembly, and an inflated form.
+Neil’s teaching encouraged me to ask how we might fabricate almost anything using air. A direct research connection is **Speech to Reality**, by Alexander Htet Kyaw, Miana Smith, Se Hwan Jeon, and Neil Gershenfeld (ACM SCF 2025). It connects natural-language input, a generated 3D mesh, geometric processing, and robotic assembly. The geometry is checked against assembly constraints before the robot builds it. [Read the published paper](https://doi.org/10.1145/3745778.3766670) · [Author’s project page](https://alexanderhtetkyaw.com/speech-to-reality/).
+
+<div style="position:relative;width:100%;aspect-ratio:16/9;margin:1.5rem 0;">
+  <iframe src="https://www.youtube-nocookie.com/embed/RbrPrU9teNM" title="Speech to Reality — research demonstration by Alexander Htet Kyaw and collaborators, including Neil Gershenfeld" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="fullscreen;picture-in-picture;encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+Research demonstration from Alexander Htet Kyaw’s channel; credited to the research team above. [Watch on YouTube](https://www.youtube.com/watch?v=RbrPrU9teNM).
+
+**How I connect this to my work:** I want to translate a request into textile geometry, fabricable panels, sewn or bonded assemblies, and an inflated form. That is my proposed extension of the prompt-to-fabrication idea; the demonstrated research uses modular robotic assembly. My constraints would include material direction, seam construction, airtightness, pressure, and the difference between a flat cutting pattern and its inflated shape.
+
+### Mechanical feedback: MechStyle
+
+A second connection is **MechStyle** (ACM SCF 2025), by Faraz Faruqi, Amira Abdel-Rahman, Leandra Tejedor, Martin Nisser, Jiaji Li, Vrushank Phadnis, Varun Jampani, Neil Gershenfeld, Megan Hofmann, and Stefanie Mueller. It feeds finite element analysis (FEA) results back into text-driven stylization, reducing geometric changes in regions experiencing higher stress. Its examples concern solid 3D-printed objects, so applying the idea to an inflatable would require a different material model and loading setup. [Read the researchers’ project page and paper](https://hcie.csail.mit.edu/research/mechstyle/mechstyle.html).
+
+<div style="position:relative;width:100%;aspect-ratio:16/9;margin:1.5rem 0;">
+  <iframe src="https://www.youtube-nocookie.com/embed/3BEZYZ86DNQ" title="MechStyle — generative design with mechanical simulation, research video from MIT HCI Engineering" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="fullscreen;picture-in-picture;encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+Video linked from the MechStyle research project. [Watch on YouTube](https://www.youtube.com/watch?v=3BEZYZ86DNQ).
+
+**My research question:** could structural feedback guide a text-to-inflation workflow before I cut fabric? For example, a requested shape might need a larger tube radius, different seams, reinforcement, or revised supports. Those changes would need simulation and physical validation rather than visual similarity alone.
+
+A related 2025 workshop paper by Kyaw, Jeon, Smith, and Gershenfeld, [Making Physical Objects with Generative AI and Robotic Assembly](https://arxiv.org/abs/2504.19131), evaluates fabrication constraints, time, sustainability, functionality, and accessibility. I can use those five questions to assess my own workflow: can it be made, how long does it take, what material is used, does it perform as intended, and who can use the tools?
 
 ## 3. Materials and tools
 
@@ -154,7 +176,7 @@ These tests helped me compare sewing, adhesive bonding, and a combination of bot
 
 ## 6. Interactive web app
 
-### Panel & Assembly Studio
+### 6.1 Pattern and assembly studio
 
 This browser-based prototype connects my digital geometry work to textile fabrication. It loads my supplied model and can import OBJ, STL, or 3DM files, prepare numbered panels with seam allowances, and export DXF cutting layouts and CSV lists. The assembly view helps identify matching panel edges.
 
@@ -163,10 +185,53 @@ Try changing the panel resolution or dimensions, generating a cut layout, and se
 [Open the interactive studio](https://prapawitintun.github.io/text-to-inflation/) · [View the GitHub repository](https://github.com/prapawitintun/text-to-inflation) · [Download the standalone HTML](https://raw.githubusercontent.com/prapawitintun/text-to-inflation/main/AAG_Textile_Studio_2026.html)
 
 <div style="width:100%;margin:1.5rem 0;">
-  <iframe src="https://prapawitintun.github.io/text-to-inflation/AAG_Textile_Studio_2026.html" title="Panel and Assembly Studio — interactive textile pattern tool by Prapawit Intun" loading="lazy" style="width:100%;height:960px;border:1px solid #d5ddd5;border-radius:10px;" allow="fullscreen" allowfullscreen></iframe>
+  <iframe src="https://prapawitintun.github.io/text-to-inflation/studio.html" title="Air / Script — pattern assembly and preliminary structural study by Prapawit Intun" loading="lazy" style="width:100%;height:960px;border:1px solid #d5ddd5;border-radius:10px;" allow="fullscreen" allowfullscreen></iframe>
 </div>
 
-The current app prepares geometry and fabrication patterns. Text input and control of a physical inflatable structure are future research directions. The app does not simulate pressure, fabric behavior, or seam strength, and its patterns still need physical testing.
+The studio now has two modes: **Pattern & assembly** and **Structural study**. The second mode is a preliminary analytical tool for ideal cylinders and spheres. It evaluates pressure-induced membrane demand independently of the model in the pattern editor. Text-driven generation and physical inflation control remain future research directions.
+
+### 6.2 From a mesh to structural behavior
+
+The engineering slide I photographed during the Pneuhaus lecture connects geometric modeling with an analysis visualization. The left image shows a discretized form; the right shows a colored numerical visualization. The photograph does not provide a readable result legend, units, material parameters, or load case, so I cannot identify its plotted quantity or infer structural capacity from its colors.
+
+<figure>
+  <img src="https://prapawitintun.github.io/text-to-inflation/images/week08/pneuhaus-engineering-analysis.jpg" alt="Pneuhaus lecture engineering slide with a meshed inflatable form on the left and a colored analysis visualization on the right" loading="lazy" style="width:100%;height:auto;border-radius:8px;">
+  <figcaption>Engineering slide from Pneuhaus’s “Building with Air” lecture at Harvard GSD. Photo: Prapawit (Pam) Intun; slide and work shown: Pneuhaus. This is a research reference, not an analysis result for my prototypes.</figcaption>
+</figure>
+
+For my work, the question is how internal pressure, fabric direction, thickness, seams, and supports together determine the inflated form and its response to loading. A cutting mesh gives me geometry and assembly information; a structural model also needs material behavior, loads, and boundary conditions.
+
+### 6.3 Interactive structural study: pressure and membrane demand
+
+Select **Structural study** in the app above, or [open the analysis tool directly](https://prapawitintun.github.io/text-to-inflation/structure-analysis.html).
+
+The tool calculates equilibrium membrane forces in an already-inflated ideal cylinder or sphere. With gauge pressure p, inflated radius r, and current wall thickness t, the cylinder’s hoop force per unit width is pr and its axial force is pr/2. For a sphere, both directions carry pr/2. Dividing membrane force by thickness gives wall stress. [Equation reference: University of Illinois, Introductory Solid Mechanics](https://mechref.engr.illinois.edu/sol/pressure.html).
+
+Try doubling the pressure: the predicted force doubles if radius is held fixed. Doubling thickness halves wall stress at that prescribed geometry, while force per unit width stays the same. The tool does not calculate how pressure changes the radius or thickness of a real silicone or fabric sample.
+
+The default 2 kPa pressure, 100 mm radius, and 0.3 mm thickness are illustrative inputs. They are not measurements from my prototypes. I can optionally enter fabric and seam strip-test strengths to compare demand with those measurements. The displayed comparison factor is also an example, not a recommended design value.
+
+The view uses a uniform analytical stress color, with units and a fixed editable scale. It does not predict local stress concentrations. The pattern editor’s uploaded mesh, arch geometry, and sewn junctions are not analyzed by this ideal-shape calculation.
+
+### 6.4 What I need for a full analysis of my inflatable
+
+A full model would need the following evidence and setup:
+
+| Part of the model | What I would measure or define |
+| --- | --- |
+| Geometry | Flat cutting patterns, inflated dimensions, fabric orientation, ports, and reinforcement. |
+| Material | Warp/weft tensile response and shear for woven fabric; a calibrated stretch model for silicone, including thickness changes. |
+| Connections | Actual stitched or bonded seam construction, strip-test behavior, and any slip or separation. |
+| Loads and restraints | Gauge pressure, self-weight, external loading, and how the specimen is supported or anchored. |
+| Solution and checks | Nonlinear pressurization, large deformation, mesh refinement, and convergence before interpreting stress or displacement. |
+| Validation | Compare predicted shapes and force levels with measured pressure–shape tests and seam behavior. |
+
+NASA’s [Smalley, Tinker, and Saxon study (2002)](https://ntrs.nasa.gov/citations/20030014812) describes nonlinear pressurization before subsequent modal analysis, capturing the stiffening effect of pressure and checking predictions against an inflated-cylinder experiment. It is a useful methodological reference for moving beyond a static geometric preview.
+
+### 6.5 Toward a feedback loop for text-to-inflation
+
+My proposed workflow is: **describe an intention → generate a candidate form → prepare panels → evaluate material and structural behavior → revise → fabricate and test**. Speech to Reality provides a precedent for checking fabrication constraints between a prompt and assembly. MechStyle provides a precedent for feeding mechanical results back into generation. My next research step is to adapt those ideas to pressurized textiles and verify them with physical samples.
+
 
 ## 7. Reflection and next steps
 
@@ -179,6 +244,12 @@ For the next experiments, I want to compare more controlled samples, improve sea
 ## 8. Files, references, and credits
 
 - [Interactive studio and source repository](https://github.com/prapawitintun/text-to-inflation).
+- Kyaw, Smith, Jeon, and Gershenfeld (2025), [Speech to Reality](https://doi.org/10.1145/3745778.3766670), ACM SCF; [project and demonstration](https://alexanderhtetkyaw.com/speech-to-reality/).
+- Faruqi et al., including Gershenfeld (2025), [MechStyle](https://hcie.csail.mit.edu/research/mechstyle/mechstyle.html), ACM SCF; paper and demonstration linked on the research page.
+- Kyaw, Jeon, Smith, and Gershenfeld (2025), [Making Physical Objects with Generative AI and Robotic Assembly](https://arxiv.org/abs/2504.19131), workshop paper.
+- University of Illinois, [Introductory Solid Mechanics: Pressure Vessels](https://mechref.engr.illinois.edu/sol/pressure.html), analytical membrane equations.
+- Smalley, Tinker, and Saxon (2002), [Nonlinear Pressurization and Modal Analysis Procedure for Dynamic Modeling of Inflatable Structures](https://ntrs.nasa.gov/citations/20030014812), NASA NTRS.
+
 - [Standalone app HTML](https://raw.githubusercontent.com/prapawitintun/text-to-inflation/main/AAG_Textile_Studio_2026.html), including the app’s embedded source-file downloads.
 - [Porpla’s soft robotics documentation](https://class.textile-academy.org/2026/pattaraporn-kittisapkajon/assignments/week08/).
 - Pneuhaus, “Building with Air,” lecture attended at Harvard Graduate School of Design; photographs above document the presentation and work shown.

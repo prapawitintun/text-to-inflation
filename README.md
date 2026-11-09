@@ -11,3 +11,11 @@ Text-to-inflation is the research direction. The current application prepares ge
 `week08.md` contains the Fabricademy documentation with captioned images and five Vimeo embeds. Optimized images are in `images/week08/`. Credits are recorded beside each image and in the documentation.
 
 GitHub Pages serves the repository root from `main`. `.nojekyll` serves the app as static files. `index.html` opens the standalone app.
+
+## Structural study
+
+`studio.html` combines the original pattern editor with `structure-analysis.html`. The analytical model (`analysis-model.js`) calculates ideal cylinder/sphere membrane forces and stresses from gauge pressure, inflated radius, and thickness. The UI (`analysis-ui.js`) includes a pressure sweep, a fixed color scale, input validation, and optional comparison to user-entered fabric/seam strip strengths.
+
+This is an equilibrium calculation in prescribed ideal geometry, not FEA, nonlinear form-finding, or analysis of the uploaded mesh. Example inputs and comparison factor are illustrative. Equations and model boundaries are documented in the tool and Week 08 page.
+
+The Week 08 research update includes credited Speech to Reality and MechStyle videos, their primary research links, and Pam’s Pneuhaus engineering-lecture photograph.
