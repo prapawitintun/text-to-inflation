@@ -22,7 +22,7 @@ The Week 08 research update includes credited Speech to Reality and MechStyle vi
 
 ## Analysis connected to the pattern mesh
 
-The Structural study tab now loads `model-analysis.html`. `studio.html` loads the original standalone app into a same-origin document with `model-bridge.js` appended, preserving the original source file. A checked postMessage exchange transfers the current scaled vertices and triangles to the analysis tab. The direct analysis page can also load the original 800 / 1,600 / 3,200-face supplied approximations or a closed OBJ/STL mesh.
+The Structural study tab now loads `model-analysis.html`. `studio.html` loads the original standalone app and appends the same-origin helper `model-bridge.js` after the editor loads, preserving the original source file. A checked postMessage exchange transfers the current scaled vertices and triangles to the analysis tab. The direct analysis page can also load the original 800 / 1,600 / 3,200-face supplied approximations or a closed OBJ/STL mesh.
 
 `mesh-membrane.js` implements an educational nonlinear triangular surface-membrane energy and gradient, plane-stress St Venant–Kirchhoff elasticity, optional tension-field energy relaxation, pressure potential, fixed vertex constraints, and an L-BFGS minimizer with load increments. `mesh-worker.js` runs the solve off the UI thread. Non-converged maps are withheld. Face values, displacement, residual, supports, assumptions, and the reference mesh can be exported as JSON.
 
