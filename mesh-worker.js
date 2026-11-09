@@ -1,0 +1,2 @@
+importScripts('./mesh-membrane.js');
+onmessage=event=>{try{const {mesh,fixed,params}=event.data;const model=MeshMembrane.prepare(mesh,fixed,params.E,params.nu,params.thickness,params.tensionOnly);const result=MeshMembrane.solve(model,{pressureKPa:params.pressure,maxIterations:params.iterations,steps:4,tolerance:1e-4},progress=>postMessage({type:'progress',...progress}));postMessage({type:'result',result});}catch(error){postMessage({type:'error',error:error.message})}};

@@ -188,7 +188,7 @@ Try changing the panel resolution or dimensions, generating a cut layout, and se
   <iframe src="https://prapawitintun.github.io/text-to-inflation/studio.html" title="Air / Script — pattern assembly and preliminary structural study by Prapawit Intun" loading="lazy" style="width:100%;height:960px;border:1px solid #d5ddd5;border-radius:10px;" allow="fullscreen" allowfullscreen></iframe>
 </div>
 
-The studio now has two modes: **Pattern & assembly** and **Structural study**. The second mode is a preliminary analytical tool for ideal cylinders and spheres. It evaluates pressure-induced membrane demand independently of the model in the pattern editor. Text-driven generation and physical inflation control remain future research directions.
+The studio has two connected modes: **Pattern & assembly** and **Structural study**. Structural study now uses my supplied AAG mesh, including the current scale and geometry from the pattern editor. It calculates a preliminary nonlinear elastic membrane response to pressure. Text-driven generation and physical inflation control remain future research directions.
 
 ### 6.2 From a mesh to structural behavior
 
@@ -201,17 +201,27 @@ The engineering slide I photographed during the Pneuhaus lecture connects geomet
 
 For my work, the question is how internal pressure, fabric direction, thickness, seams, and supports together determine the inflated form and its response to loading. A cutting mesh gives me geometry and assembly information; a structural model also needs material behavior, loads, and boundary conditions.
 
-### 6.3 Interactive structural study: pressure and membrane demand
+### 6.3 Interactive structural study on my model
 
-Select **Structural study** in the app above, or [open the analysis tool directly](https://prapawitintun.github.io/text-to-inflation/structure-analysis.html).
+Select **Structural study** in the app above, or [open the model analysis directly](https://prapawitintun.github.io/text-to-inflation/studio.html#structure). My supplied AAG model loads automatically. The integrated studio transfers the current pattern mesh and its dimensions, so changes made in **Pattern & assembly** can be studied on the same geometry. A **Use current pattern model** button requests a fresh transfer.
 
-The tool calculates equilibrium membrane forces in an already-inflated ideal cylinder or sphere. With gauge pressure p, inflated radius r, and current wall thickness t, the cylinder’s hoop force per unit width is pr and its axial force is pr/2. For a sphere, both directions carry pr/2. Dividing membrane force by thickness gives wall stress. [Equation reference: University of Illinois, Introductory Solid Mechanics](https://mechref.engr.illinois.edu/sol/pressure.html).
+The view now shows my actual triangulated geometry. Green dots identify vertices fixed in X, Y, and Z. The initial support assumption clamps the lowest 5% of the model’s Z range; I can change the band or click triangles in support-editing mode. Those supports need to match the real experiment before I interpret the results physically.
 
-Try doubling the pressure: the predicted force doubles if radius is held fixed. Doubling thickness halves wall stress at that prescribed geometry, while force per unit width stays the same. The tool does not calculate how pressure changes the radius or thickness of a real silicone or fabric sample.
+The solver applies pressure to the oriented closed mesh and minimizes membrane strain energy minus pressure times enclosed volume. It uses geometrically nonlinear triangular elements and an illustrative isotropic plane-stress St Venant–Kirchhoff material. The optional tension-field relaxation removes compressive membrane stress in slack/wrinkled directions without resolving individual wrinkle shapes. Background references: [constant-strain triangles, University of Alberta](https://engcourses-uofa.ca/finite-element-analysis/two-dimensional-solid-elements/), and [Pipkin’s relaxed membrane energy (1986)](https://academic.oup.com/imamat/article-abstract/36/1/85/762621).
 
-The default 2 kPa pressure, 100 mm radius, and 0.3 mm thickness are illustrative inputs. They are not measurements from my prototypes. I can optionally enter fabric and seam strip-test strengths to compare demand with those measurements. The displayed comparison factor is also an example, not a recommended design value.
+After a converged solve, I can inspect:
 
-The view uses a uniform analytical stress color, with units and a fixed editable scale. It does not predict local stress concentrations. The pattern editor’s uploaded mesh, arch geometry, and sewn junctions are not analyzed by this ideal-shape calculation.
+- Maximum and minimum principal membrane force in N/mm, colored across the mesh.
+- Displacement in mm and a separate visual deformation magnification.
+- Maximum Green strain in percent.
+- Individual F-numbered triangles and their computed values.
+- The force residual, solver iterations, fixed vertices, and a downloadable JSON report.
+
+The starting **0.2 kPa pressure, 0.3 mm reference thickness, 100 MPa elastic modulus, and 0.3 Poisson ratio are example inputs**, not measured properties of my prototypes. The default dimensions match the pattern studio’s initial 2,500 × 2,500 × 2,300 mm Fit XYZ settings; transferring my current pattern model uses its current dimensions instead.
+
+This analysis treats the supplied three-dimensional mesh as an unstressed reference surface. It does not simulate assembly from flat sewn panels. It also omits woven-fabric anisotropy, seam slip and failure, self-contact, and calibrated silicone behavior. Numerical convergence establishes equilibrium for the stated assumed model; it does not validate the physical object or its load-bearing capacity. Non-converged runs withhold the displacement and force maps. Support and mesh refinement studies are still needed, especially before interpreting local peak values.
+
+I can also open the [separate ideal-cylinder/sphere calculator](https://prapawitintun.github.io/text-to-inflation/structure-analysis.html) to compare simple pressure–radius–thickness relationships with an analytical reference.
 
 ### 6.4 What I need for a full analysis of my inflatable
 
@@ -247,6 +257,8 @@ For the next experiments, I want to compare more controlled samples, improve sea
 - Kyaw, Smith, Jeon, and Gershenfeld (2025), [Speech to Reality](https://doi.org/10.1145/3745778.3766670), ACM SCF; [project and demonstration](https://alexanderhtetkyaw.com/speech-to-reality/).
 - Faruqi et al., including Gershenfeld (2025), [MechStyle](https://hcie.csail.mit.edu/research/mechstyle/mechstyle.html), ACM SCF; paper and demonstration linked on the research page.
 - Kyaw, Jeon, Smith, and Gershenfeld (2025), [Making Physical Objects with Generative AI and Robotic Assembly](https://arxiv.org/abs/2504.19131), workshop paper.
+- University of Alberta, [Two Dimensional Solid Elements](https://engcourses-uofa.ca/finite-element-analysis/two-dimensional-solid-elements/), triangular finite element formulation.
+- Pipkin (1986), [The Relaxed Energy Density for Isotropic Elastic Membranes](https://academic.oup.com/imamat/article-abstract/36/1/85/762621), tension-field methodology.
 - University of Illinois, [Introductory Solid Mechanics: Pressure Vessels](https://mechref.engr.illinois.edu/sol/pressure.html), analytical membrane equations.
 - Smalley, Tinker, and Saxon (2002), [Nonlinear Pressurization and Modal Analysis Procedure for Dynamic Modeling of Inflatable Structures](https://ntrs.nasa.gov/citations/20030014812), NASA NTRS.
 

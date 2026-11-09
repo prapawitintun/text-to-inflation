@@ -19,3 +19,11 @@ GitHub Pages serves the repository root from `main`. `.nojekyll` serves the app 
 This is an equilibrium calculation in prescribed ideal geometry, not FEA, nonlinear form-finding, or analysis of the uploaded mesh. Example inputs and comparison factor are illustrative. Equations and model boundaries are documented in the tool and Week 08 page.
 
 The Week 08 research update includes credited Speech to Reality and MechStyle videos, their primary research links, and Pam’s Pneuhaus engineering-lecture photograph.
+
+## Analysis connected to the pattern mesh
+
+The Structural study tab now loads `model-analysis.html`. `studio.html` loads the original standalone app into a same-origin document with `model-bridge.js` appended, preserving the original source file. A checked postMessage exchange transfers the current scaled vertices and triangles to the analysis tab. The direct analysis page can also load the original 800 / 1,600 / 3,200-face supplied approximations or a closed OBJ/STL mesh.
+
+`mesh-membrane.js` implements an educational nonlinear triangular surface-membrane energy and gradient, plane-stress St Venant–Kirchhoff elasticity, optional tension-field energy relaxation, pressure potential, fixed vertex constraints, and an L-BFGS minimizer with load increments. `mesh-worker.js` runs the solve off the UI thread. Non-converged maps are withheld. Face values, displacement, residual, supports, assumptions, and the reference mesh can be exported as JSON.
+
+The supplied three-dimensional mesh is treated as an unstressed reference surface. Material constants, scale, and the default support band are illustrative; seams, anisotropy, self-contact, and physical capacity are not modeled. Numerical checks include energy-gradient differences, an affine-strain patch test, zero load, fixed supports, closed topology, and an inflated-sphere/Laplace comparison. These checks do not constitute validation against Pam’s fabricated samples.
